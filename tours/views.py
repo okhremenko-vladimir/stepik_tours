@@ -14,12 +14,12 @@ def departure_view(request, departure):
 
 def tour_view(request, tour_id):
     title = tours[tour_id]['title'] + ' ' + '★' * int(tours[tour_id]['stars'])
-    tour_info = tours[tour_id]['country'] + ' из ' + departures[tours[tour_id]['departure']]
-    tour_info += ' ' + str(tours[tour_id]['nights']) + ' ночей'
-    tour_about = tours[tour_id]['description']
+    from_city = departures[tours[tour_id]['departure']]
+    info = '{} {} {} ночей'.format(tours[tour_id]['country'], from_city, tours[tour_id]['nights'])
+    about = tours[tour_id]['description']
     price = tours[tour_id]['price']
     link_picture = tours[tour_id]['picture']
-    context = {'title': title, 'tour_info': tour_info, 'tour_about': tour_about,
+    context = {'title': title, 'info': info, 'about': about,
                'price': price, 'link_picture': link_picture}
     return render(request, 'tours/tour.html', context)
 
