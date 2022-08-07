@@ -5,12 +5,17 @@ class ResultsDirection:
 
     def __str__(self):
         min_price = min(self.tours, key=lambda x: x['price'])
-        min_price = '{:,}'.format(min_price['price']).replace(',', ' ')
+        mn_price = '{:,}'.format(min_price['price']).replace(',', ' ')
         max_price = max(self.tours, key=lambda x: x['price'])
-        max_price = '{:,}'.format(max_price['price']).replace(',', ' ')
-        min_night = min(self.tours, key=lambda x: x['nights'])['nights']
-        max_night = max(self.tours, key=lambda x: x['nights'])['nights']
-        results = f'Найдено {self.len_tours} туров, от {min_price} до {max_price} и от {min_night} до {max_night} ночей'
+        mx_price = '{:,}'.format(max_price['price']).replace(',', ' ')
+        mn_night = min(self.tours, key=lambda x: x['nights'])['nights']
+        mx_night = max(self.tours, key=lambda x: x['nights'])['nights']
+        tour_ru = 'туров'
+        if self.len_tours % 10 == 1 and self.len_tours % 100 != 11:
+            tour_ru = 'тур'
+        elif 2 <= self.len_tours % 10 <= 4 and (self.len_tours % 100 < 10 or self.len_tours % 100 >= 20):
+            tour_ru = 'тура'
+        results = f'Найдено {self.len_tours} {tour_ru}, от {mn_price} до {mx_price} и от {mn_night} до {mx_night} ночей'
         return results
 
 
